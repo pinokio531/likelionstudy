@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+            메인페이지 입니다 <br>
+
+            로그인 버튼 <br>
+            회원가입 버튼 <br>
+            
+            로그아웃 버튼 <br>
+            
+            page 내 정보 수정 <br>
+            
+            게시판 -> 더보기 <br>
+            
+            페이지네이션 <br>
+            
+            page 글쓰기 버튼 <br>
+            
+            page 내용 수정하기 버튼 <br>
+
+            <form method="GET" action="{% url 'newContentsPage' %}">
+                <input type="submit" value="새글">
+            </form>
+
+            {% for item in blogList %}
+                <div style="display: flex; flex-direction: column; height: 50px; margin-top: 50px; align-items: center">
+                    <div style="display: flex; align-items: center; font-size: 30px">
+                        <a href="main/detail/?title={{item.title}}">{{item.id}}. {{item.title}}</a>
+                    </div>
+                    <div style="display: flex; align-items: center; padding-top: 10px; font-size: 15px;">
+                        수정일 - {{item.modify_date}}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div style="width: 100%; text-align: center; margin-top: 100px">
+                    {% if blogList.number != 1 %}
+                    <a href="?page=1">처음</a>
+                    {% else %}
+                        <a> 처음 페이지 입니다.</a>
+                    {% endif %}
+                
+                    {% if blogList.number > 1 %}
+                        <a href="?page={{blogList.previous_page_number}}">이전</a>
+                    {% endif %}
+                
+                    (
+                    <span>{{blogList.number}}</span>
+                    /
+                    <span>{{blogList.paginator.num_pages}}</span>
+                    )
+                    {% if blogList.number < blogList.paginator.num_pages %}
+                        <a href="?page={{blogList.next_page_number}}">다음</a>
+                    {% endif %}
+                
+                    {% if blogList.number != blogList.paginator.num_pages%}
+                        <a href="?page={{blogList.paginator.num_pages}}">마지막</a>
+                    {% else %}
+                        <a> 마지막 페이지 입니다.</a>
+                    {% endif %}
+                </div>
+    </body>
+</html>

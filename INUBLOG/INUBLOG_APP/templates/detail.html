@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <h3>제목</h3>
+    {{selectedItem.title}} <br>
+    
+    <h3>내용</h3>
+    {{selectedItem.body}} <br>
+
+    <h5>최초등록일</h5>
+    {{selectedItem.enroll_date}}
+    
+    <h5>최근수정일</h5>
+    {{selectedItem.modify_date}}
+
+    <form method="GET" action="{% url 'newContentsPage' %}">
+        <input type="submit" value="수정">
+    </form>
+    </body>
+</html>

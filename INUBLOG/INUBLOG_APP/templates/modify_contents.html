@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <form method="GET" action="{% url 'createContents' %}">
+            <div>
+                제목 <br>
+                <input type="text" name="modify_title">
+            </div>
+            <div style="margin-top: 50px">
+                내용 <br>
+                <textarea name="modify_body" id="" cols="30" rows="10"></textarea>
+            </div>
+            <input type="submit" value="등록">
+        </form>
+    </body>
+</html>
