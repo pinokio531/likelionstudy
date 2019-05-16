@@ -44,8 +44,3 @@ def newContents(request):
     contents.modify_date = timezone.datetime.now()
     contents.save()
     return redirect('/main/detail/?title=' + contents.title)
-
-def modifyContents(request):
-    
-
-# Create your views here.
