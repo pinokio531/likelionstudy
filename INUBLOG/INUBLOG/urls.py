@@ -23,9 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', appViews.mainPage, name = "mainPage"),
     path('new/', appViews.newContentsPage, name = "newContentsPage"),
-    path('modify/', appViews.modifyContentsPage, name = "modifyContentsPage"),
+    path('modify/<int:content_id>', appViews.modifyContentsPage, name = "modifyContentsPage"),
     path('login/', appViews.loginPage, name = "loginPage"),
     path('signUp/', appViews.signUpPage, name = "signUpPage"),
     path('main/detail/', appViews.detailPage, name = "detailPage"),
-    path('create/', appViews.newContents, name = "createContents")
+    path('create/', appViews.newContents, name = "createContents"),
+    path('modified/<int:content_id>', appViews.modifiedContents, name = "modifiedContents"),
+    path('delete/<int:content_id>', appViews.deleteContents, name = "deleteContents"),
 ]

@@ -19,8 +19,16 @@
     <h5>최근수정일</h5>
     {{selectedItem.modify_date}}
 
-    <form method="GET" action="{% url 'newContentsPage' %}">
-        <input type="submit" value="수정">
-    </form>
+    {% if selectedItem.id != none %}
+        <form method="GET" action="{% url 'deleteContents' selectedItem.id %}">
+            <input type="submit" value="삭제">
+        </form>
+    {% endif %}
+
+    {% if selectedItem.id != none %}
+        <form method="GET" action="{% url 'modifyContentsPage' selectedItem.id %}">
+            <input type="submit" value="수정">
+        </form>
+    {% endif %}
     </body>
 </html>

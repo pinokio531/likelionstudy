@@ -16,8 +16,9 @@ def mainPage(request):
 def newContentsPage(request):
     return render(request, 'new_contents.html')
 
-def modifyContentsPage(request):
-    return render(request, 'modify_contents.html')
+def modifyContentsPage(request, content_id):
+    selectedItem = get_object_or_404(appModel.BlogContents, pk = content_id)
+    return render(request, 'modify_contents.html', {'selectedItem': selectedItem})
 
 def signUpPage(request):
     return render(request, 'sign_up.html')
@@ -36,6 +37,7 @@ def detailPage(request):
 
     return render(request, 'detail.html', {'selectedItem': selectedItem})
 
+
 def newContents(request):
     contents = appModel.BlogContents()
     contents.title = request.GET['new_title']
@@ -44,3 +46,26 @@ def newContents(request):
     contents.modify_date = timezone.datetime.now()
     contents.save()
     return redirect('/main/detail/?title=' + contents.title)
+
+def modifiedContents(request, content_id):
+    if request.method == 'POST':
+
+        modifideTitle = request.POST['modify_title']
+        modifideBody = request.POST['modify_body']
+        modifideDate = timezone.datetime.now()
+
+        modifiedItem = appModel.BlogContents.objects.get(id=content_id)
+
+        modifiedItem.title = modifideTitle
+        modifiedItem.body = modifideBody
+        modifiedItem.modify_date = modifideDate
+        modifiedItem.save()
+
+        return redirect('/main/detail/?title=' + modifiedItem.title)
+
+def deleteContents(request, content_id):
+    modifiedItem = appModel.BlogContents.objects.get(id=content_id)
+    modifiedItem.delete()
+
+    return redirect('/')
+
